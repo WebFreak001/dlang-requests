@@ -51,10 +51,7 @@ shared static this() {
     import crash_handler;
     static if (BacktraceHandler)
     {
-        shared static this()
-        {
-            regsiterErrorHandlers();
-        }
+        regsiterErrorHandlers();
     }
 
     version(OSX) {
