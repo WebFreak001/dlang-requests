@@ -48,6 +48,15 @@ private alias Version = Tuple!(int, "major", int, "minor");
 immutable static OpenSSL openssl;
 
 shared static this() {
+    import crash_handler;
+    static if (BacktraceHandler)
+    {
+        shared static this()
+        {
+            regsiterErrorHandlers();
+        }
+    }
+
     version(OSX) {
         enum loadFunction = "dlopen(lib.ptr, RTLD_LAZY)";
         immutable string[] libsslname = [
